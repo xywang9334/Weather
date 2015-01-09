@@ -1,19 +1,9 @@
 package com.example.weather.app;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import java.util.ArrayList;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -24,7 +14,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, new ForecastFragment())
                     .commit();
         }
     }
@@ -47,38 +37,5 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
-            /* the data is faked and for test only */
-            ArrayList<String> weekForecast = new ArrayList<String>();
-            weekForecast.add("Today-sunny-88/63");
-            weekForecast.add("Tomorrow-foggy-70/64");
-            weekForecast.add("Weds-cloudy-72/63");
-            weekForecast.add("Thurs-Rainy-64/51");
-            weekForecast.add("Fri-foggy-70/46");
-            weekForecast.add("Sat-Sunny-76/68");
-            ArrayAdapter<String> mForecastAdapter = new ArrayAdapter<String>(getActivity(),
-                    R.layout.list_item_forecast,
-                    R.id.item_list_forecast_textview,
-                    weekForecast);
-
-            //find the view and set the adapter
-            ListView listView = (ListView) rootView.findViewById(R.id.listview_forecast);
-            listView.setAdapter(mForecastAdapter);
-            return rootView;
-        }
     }
 }
